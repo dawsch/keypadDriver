@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="keyboardWindow.writeMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:keyboardWindow"
+             xmlns:buttons="clr-namespace:Buttons;assembly=Buttons"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="Text to write: " Foreground="White"/>
+        </ContentControl>
+        <ContentControl HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0">
+            <TextBlock x:Name="errorBox" Visibility="Hidden" Text="Type text to wirte" Foreground="Red"/>
+        </ContentControl>
+        <TextBox x:Name="textToWriteBox" TextChanged="textBox_TextChanged" Margin="0, 5, 0, 5" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2" Background="#292929"/>
+        <buttons:roundButton x:Name="dragButton" Grid.Row="2" Grid.ColumnSpan="2" cornerRadius="10" Content="choosen text" HorizontalContentAlignment="Center" PreviewMouseDown="buttonPreviewMouseDown"/>
+    </Grid>
+</UserControl>

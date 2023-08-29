@@ -1,0 +1,52 @@
+layer0 {
+button0 {pressShortcut[test](CONTROL, SHIFT, VK_D, VK_R, VK_S, VK_Q, VK_G, VK_Z)}
+button1 {}
+button2 {}
+button3 {pressShortcut[Undo](CONTROL, VK_Z)}
+button4 {runProgram(C:\Windows\System32\notepad.exe)}
+button5 {pressKey(BROWSER_FORWARD)}
+button6 {pressKey(VOLUME_DOWN); pressKey(MEDIA_PREV_TRACK)}
+button7 {pressShortcut[randMacro](CONTROL, SHIFT, VK_L, VK_3, VK_T, VK_9, VK_K)}
+button8 {pressKey(VOLUME_UP); pressKey(VOLUME_UP)}
+button9 {pressKey(BROWSER_FAVORITES)}
+button10 {}
+}
+layer1 {
+button0 {pressKey(VK_Y); writeText(ezzzzz); pressKey(RETURN)}
+button1 {}
+button2 {}
+button3 {}
+button4 {pressKey(BROWSER_FORWARD)}
+button5 {}
+button6 {pressShortcut[Copy](CONTROL, VK_C)}
+button7 {}
+button8 {}
+button9 {}
+button10 {pressShortcut[macro](CONTROL, SHIFT, VK_L, VK_A, VK_J, VK_N, VK_S, VK_T)}
+}
+layer2 {
+button0 {}
+button1 {}
+button2 {}
+button3 {}
+button4 {}
+button5 {}
+button6 {}
+button7 {}
+button8 {}
+button9 {}
+button10 {}
+}
+layer3 {
+button0 {}
+button1 {}
+button2 {}
+button3 {}
+button4 {}
+button5 {}
+button6 {}
+button7 {}
+button8 {}
+button9 {}
+button10 {}
+}

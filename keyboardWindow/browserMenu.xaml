@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="keyboardWindow.browserMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:keyboardWindow"
+             xmlns:buttons="clr-namespace:Buttons;assembly=Buttons"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="0, 5, 2.5, 5">
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDown" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Back" Tag="BROWSER_BACK"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDown" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Forward" Tag="BROWSER_FORWARD"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDown" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Favorites" Tag="BROWSER_FAVORITES"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDown" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Browser home" Tag="BROWSER_HOME"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDown" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Refresh" Tag="BROWSER_REFRESH"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDown" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Search" Tag="BROWSER_SEARCH"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDown" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Stop" Tag="BROWSER_STOP"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="2.5, 5, 0, 5">
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDownShortcut" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="New Tab" Tag="CONTROL,VK_T"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDownShortcut" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="New window" Tag="CONTROL,VK_N"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDownShortcut" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Incognito window" Tag="CONTROL,SHIFT,VK_T"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDownShortcut" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Next tab" Tag="CONTROL,TAB"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDownShortcut" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Previous tab" Tag="CONTROL,SHIFT,TAB"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDownShortcut" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Close tab" Tag="CONTROL,VK_W"/>
+                <buttons:roundButton AllowDrop="True" PreviewMouseLeftButtonDown="leftButtonDownShortcut" Background="#232323" cornerRadius="10" Height="27" Margin="0, 1, 0, 1" Content="Close widnow" Tag="CONTROL,SHIFT,VK_W"/>
+            </StackPanel>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ContentControl HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="Open website: " Foreground="White"/>
+            </ContentControl>
+            <TextBox x:Name="pathBox" TextChanged="pathBox_TextChanged" Margin="0, 5, 0, 5" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2" Background="#292929"/>
+            <buttons:roundButton x:Name="dragButton" Grid.Row="2" Grid.ColumnSpan="2" cornerRadius="10" Content="Choose URL" HorizontalContentAlignment="Center" PreviewMouseDown="buttonPreviewMouseDown"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

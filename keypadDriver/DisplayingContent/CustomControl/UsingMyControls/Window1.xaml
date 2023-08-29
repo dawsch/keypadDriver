@@ -1,0 +1,18 @@
+﻿<Window x:Class="UsingSimpleDecoratorControl.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:my="http://ikriv.com/xaml/samples/DisplayingContent/CustomControl/MyControls"
+    Title="Using Custom Control" Height="300" Width="300">
+    <Grid>
+        <my:HeaderFooterControl>
+            <my:HeaderFooterControl.Header>
+                <Label Background="Red" Content="Foo" />
+            </my:HeaderFooterControl.Header>
+            <my:HeaderFooterControl.Footer>
+                <Label Background="Red" Content="Bar" />
+            </my:HeaderFooterControl.Footer>
+            
+            <Label Background="Yellow">User-supplied content here</Label>
+        </my:HeaderFooterControl>
+    </Grid>
+</Window>

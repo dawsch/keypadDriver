@@ -1,0 +1,26 @@
+﻿<Window x:Class="keyboardWindow.resetBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:keyboardWindow" xmlns:buttons="clr-namespace:Buttons;assembly=Buttons"
+        mc:Ignorable="d"
+        Title="Reset" ResizeMode="NoResize" Height="150" Width="340" Background="#1b1b1b">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label x:Name="label" Margin="10" VerticalAlignment="Center" Foreground="White" Grid.Row="0"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <buttons:roundButton Height="40" x:Name="noButton" Content="no" HorizontalContentAlignment="Center" Grid.Column="1" Margin="5" Background="#303030" cornerRadius="10" Click="noButton_Click"/>
+            <buttons:roundButton Height="40" x:Name="yesButton" Content="yes" HorizontalContentAlignment="Center" Grid.Column="2" Margin="5" Background="#303030" cornerRadius="10" Click="yesButton_Click"/>
+        </Grid>
+
+    </Grid>
+</Window>
