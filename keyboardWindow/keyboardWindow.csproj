@@ -100,6 +100,9 @@
       <DependentUpon>buttonInfoListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="buttonListTo2darray.cs" />
+    <Compile Include="changeLayerMenu.xaml.cs">
+      <DependentUpon>changeLayerMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="iconHelper.cs" />
     <Compile Include="randomShortcutMenu.xaml.cs">
       <DependentUpon>randomShortcutMenu.xaml</DependentUpon>
@@ -132,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="buttonInfoListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="changeLayerMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

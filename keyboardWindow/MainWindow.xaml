@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:keyboardWindow"
         mc:Ignorable="d"
         Title="KeyPad" Height="590" Width="900"
+        Icon="pack://application:,,,/assets/icon2.ico"
         ResizeMode="NoResize"
         xmlns:menu="clr-namespace:expandMenuA;assembly=expandMenuA"
         xmlns:buttons="clr-namespace:Buttons;assembly=Buttons"
@@ -198,8 +199,11 @@
                 <menu:expandMenuA x:Name="randomShortcutMenuView" Margin="0, 5" menuTitle="Random shortcut" expanderHeight="35" cornerRadius="10">
                     <local:randomShortcutMenu/>
                 </menu:expandMenuA>
-                <menu:expandMenuA x:Name="recordShortcutMenuView" Margin="0, 5, 0, 0" menuTitle="Record macro" expanderHeight="35" cornerRadius="10">
+                <menu:expandMenuA x:Name="recordShortcutMenuView" Margin="0, 5" menuTitle="Record macro" expanderHeight="35" cornerRadius="10">
                     <local:recordShortcutMenu/>
+                </menu:expandMenuA>
+                <menu:expandMenuA x:Name="changeLayerMenuView" Margin="0, 5, 0, 0" menuTitle="Change layer" expanderHeight="35" cornerRadius="10">
+                    <local:changeLayerMenu/>
                 </menu:expandMenuA>
             </StackPanel>
         </ScrollViewer>

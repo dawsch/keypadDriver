@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 
 namespace driverClasses
 {
-    
+
     [Guid("5CDF2C82-841E-4546-9722-0CF74078229A"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     interface IAudioEndpointVolume
     {
@@ -70,10 +70,30 @@ namespace driverClasses
     }
 
 
-    class Program
+    public class Program
     {
         static SerialPort serialPort;
         static int currentLayer = 0;
+        public static int CurrentLayer
+        { 
+            get { return currentLayer; } 
+            set 
+            { 
+                if (value <= 3 && value >= 0) 
+                {
+                    currentLayer = value;
+                }
+                else if (value >= 0)
+                {
+                    currentLayer = 0;
+                }
+                else
+                {
+                    currentLayer = 3;
+                }
+                serialPort.Write("setLED " + currentLayer);
+            } 
+        }
         static List<List<Button>> buttons, buttonsCopy;
 
         static void Main(string[] args)
@@ -100,21 +120,30 @@ namespace driverClasses
             }
 
             buttons = new List<List<Button>>();
-            
-            buttons = loader.loadFromFile();
+
+            buttons = loader.loadFromFile(changeLayerHandler);
 
             buttonsCopy = copyButtonList.copy(buttons);
-            Thread windowT = runWindow(buttonsCopy, resetKeylayoutFunc, saveKeylayoutFunc);
-            
+            Thread windowT = runWindow(buttonsCopy, resetKeylayoutFunc, saveKeylayoutFunc, changeLayerHandler);
+
             //Thread thread = new Thread(new ThreadStart(runWindow));
             //thread.Start();
 
             int potentiometer;
 
-            
+
             while (true)
             {
-                string input = serialPort.ReadExisting();
+                string input = "";
+                try
+                {
+                    input = serialPort.ReadExisting();
+
+                }
+                catch (Exception ex)
+                {
+
+                }
                 List<string> inputA = input.Split('\r').ToList<string>();
                 inputA.Remove("\r");
                 inputA.Remove("\n");
@@ -135,13 +164,15 @@ namespace driverClasses
                                 int buttonIndex = int.Parse(line[2]);
                                 if (String.Equals(line[1], "clicked"))
                                 {
-                                    if (currentLayer < buttons.Count){
-                                        if (buttonIndex < buttons[currentLayer].Count){
+                                    if (currentLayer < buttons.Count)
+                                    {
+                                        if (buttonIndex < buttons[currentLayer].Count)
+                                        {
                                             buttons[currentLayer][buttonIndex].isPressed = true;
                                             buttons[currentLayer][buttonIndex].press();
                                         }
                                     }
-                                            
+
                                 }
                                 if (String.Equals(line[1], "release"))
                                 {
@@ -168,6 +199,23 @@ namespace driverClasses
 
                 Thread.Sleep(50);
             }
+        }
+        static void nextLayerHandler()
+        {
+            CurrentLayer++;
+        }
+        static void prevLayerHandler()
+        {
+            CurrentLayer--;
+        }
+        static void changeLayerHandler(int index)
+        {
+            if (index == -1)
+                CurrentLayer++;
+            else if (index == -2)
+                CurrentLayer--;
+            else
+                CurrentLayer = index;
         }
         static internal void connectToDevise()
         {
@@ -241,12 +289,12 @@ namespace driverClasses
             if (currentLayer > 3)
                 currentLayer = 0;
         }
-        internal static Thread runWindow(List<List<Button>> buttonList, resetKeylayout rk, saveKeylayout sk)
+        internal static Thread runWindow(List<List<Button>> buttonList, resetKeylayout rk, saveKeylayout sk, changeLayerDel cl)
         {
             Thread newWindowThread = new Thread(new ThreadStart(() =>
             {
                 // create and show the window
-                MainWindow obj = new MainWindow(buttonList, rk, sk);
+                MainWindow obj = new MainWindow(buttonList, rk, sk, cl);
                 obj.Show();
 
                 // start the Dispatcher processing  

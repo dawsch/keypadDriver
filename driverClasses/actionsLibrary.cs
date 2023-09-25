@@ -208,11 +208,21 @@ namespace driverClasses
                 {
                     int start = label.IndexOf("{");
                     int end = label.IndexOf("}");
-                    string info = label.Substring(start + 1, end - start - 2);
+                    string info = label.Substring(start + 1, end - start - 1);
                     string[] infos = info.Split(';');
                     return infos.ToList();
 
                 }
+            }
+            if (keys.Count > 0)
+            {
+                List<string> addInfo;
+                addInfo = new List<string>();
+                foreach(WindowsInput.Native.VirtualKeyCode key in keys)
+                {
+                    addInfo.Add(key.ToString());
+                }
+                return addInfo;
             }
             return base.getAddInfo();
         }
@@ -348,37 +358,38 @@ namespace driverClasses
         }
     }
 
-    public class nextLayer : action
+    public class changeLayer : action
     {
-        string text;
-        InputSimulator input;
-        KeyboardSimulator keyboard;
-        public nextLayer(string text)
+        changeLayerDel cld;
+        int index;
+        public changeLayer(changeLayerDel Cl, int index = -1)
         {
-            this.text = text;
-            input = new InputSimulator();
-            keyboard = new KeyboardSimulator(input);
-        }
-        public nextLayer(string text, ref KeyboardSimulator keyboardSimulator)
-        {
-            this.text = text;
-            keyboard = keyboardSimulator;
+            cld = Cl;
+            this.index = index;
         }
         public override void execute()
         {
-            input.Keyboard.TextEntry(text);
+            if (cld != null)
+            {
+                cld(index);
+            }
         }
         public override string getLabel()
         {
-            return "nextLayer";
+            if (index == -1)
+                return "next layer";
+            else if (index == -2)
+                return "prev layer";
+            else
+                return "goto " + (index + 1).ToString() + " layer";
         }
         public override action copy()
         {
-            return new nextLayer(text, ref keyboard);
+            return new changeLayer(cld, index);
         }
         public override string serialize()
         {
-            return "nextLayer";
+            return "changeLayer(" + index.ToString() + ")";
         }
     }
     

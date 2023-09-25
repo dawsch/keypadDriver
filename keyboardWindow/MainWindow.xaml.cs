@@ -36,9 +36,10 @@ namespace keyboardWindow
         int curentLayer = 0;
         resetKeylayout resetKeylayoutDel;
         saveKeylayout saveKeylayoutDel;
+        public static changeLayerDel changeLayerDel;
         List<List<driverClasses.Button>> buttons;
 
-        public MainWindow(List<List<driverClasses.Button>> buttons, driverClasses.resetKeylayout _resetKeyLayoutDel, driverClasses.saveKeylayout _saveKeylayoutDel)
+        public MainWindow(List<List<driverClasses.Button>> buttons, driverClasses.resetKeylayout _resetKeyLayoutDel, driverClasses.saveKeylayout _saveKeylayoutDel, driverClasses.changeLayerDel _changeLayerDel)
         {
             InitializeComponent();
 
@@ -46,6 +47,7 @@ namespace keyboardWindow
             keyPadLayers = new List<keyPadLayer>();
             resetKeylayoutDel = _resetKeyLayoutDel;
             saveKeylayoutDel = _saveKeylayoutDel;
+            changeLayerDel = _changeLayerDel;
             this.buttons = buttons;
 
             Stream iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/assets/icon2.ico")).Stream;
@@ -263,6 +265,10 @@ namespace keyboardWindow
             blurOut();
 
             this.Effect = null;
+        }
+        public static void test()
+        {
+
         }
     }
 }

@@ -10,7 +10,7 @@ namespace driverClasses
 {
     class loader
     {
-        public static List<List<Button>> loadFromFile()
+        public static List<List<Button>> loadFromFile(changeLayerDel changeLayerEvent = null)
         {
             List<List<Button>> buttons = new List<List<Button>>();
             //Stream iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/config2.txt")).Stream;
@@ -69,7 +69,7 @@ namespace driverClasses
                             buttons[currentLayer].Add(new Button());
                         }
                     }
-                    buttons[currentLayer][buttonIndex] = createButton(buttonConfig);
+                    buttons[currentLayer][buttonIndex] = createButton(buttonConfig, changeLayerEvent);
                     currentWord = "";
                     chIndex++;
                     continue;
@@ -81,7 +81,7 @@ namespace driverClasses
 
             return buttons;
         }
-        internal static Button createButton(string input)
+        internal static Button createButton(string input, changeLayerDel changeLayerEvent)
         {
             Button b = new Button();
 
@@ -223,9 +223,23 @@ namespace driverClasses
                     chIndex += 2;
                     continue;
                 }
-                if (String.Equals(currentWord, "nextLayer"))
+                if (String.Equals(currentWord, "changeLayer"))
                 {
-                    //b.addNextLayer();
+                    chIndex += 2;
+                    currentWord = "";
+                    while (!char.Equals(input[chIndex], ')'))
+                    {
+                        currentWord += input[chIndex];
+                        chIndex++;
+                    }
+                    int index;
+                    if(!int.TryParse(currentWord, out index))
+                    {
+                        continue;
+                    }
+
+                    changeLayer cl = new changeLayer(changeLayerEvent, index);
+                    b.addAction(cl);
                     currentWord = "";
                     chIndex += 2;
                     continue;
