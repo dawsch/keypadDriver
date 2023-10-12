@@ -18,6 +18,8 @@ using System.Runtime.InteropServices;
 namespace driverClasses
 {
 
+
+
     [Guid("5CDF2C82-841E-4546-9722-0CF74078229A"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     interface IAudioEndpointVolume
     {
@@ -73,7 +75,9 @@ namespace driverClasses
     public class Program
     {
         static SerialPort serialPort;
+        static MainWindow mainWindow;
         static int currentLayer = 0;
+        static connectioStatus conStatus = connectioStatus.disconnected;
         public static int CurrentLayer
         { 
             get { return currentLayer; } 
@@ -110,7 +114,7 @@ namespace driverClasses
             //serialPort.RtsEnable = true;
             //serialPort.Open();
 
-            connectToDevise();
+            conStatus = connectToDevise();
 
 
             Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
@@ -124,7 +128,7 @@ namespace driverClasses
             buttons = loader.loadFromFile(changeLayerHandler);
 
             buttonsCopy = copyButtonList.copy(buttons);
-            Thread windowT = runWindow(buttonsCopy, resetKeylayoutFunc, saveKeylayoutFunc, changeLayerHandler);
+            Thread windowT = runWindow(buttonsCopy, conStatus, resetKeylayoutFunc, saveKeylayoutFunc, changeLayerHandler, reconnectProcedure);
 
             //Thread thread = new Thread(new ThreadStart(runWindow));
             //thread.Start();
@@ -217,8 +221,15 @@ namespace driverClasses
             else
                 CurrentLayer = index;
         }
-        static internal void connectToDevise()
+
+        static void reconnectProcedure()
         {
+            mainWindow.showConnectingWindow();
+        }
+
+        static internal connectioStatus connectToDevise()
+        {
+            conStatus = connectioStatus.connecting;
             string[] portList = SerialPort.GetPortNames();
             Thread thread;
 
@@ -246,9 +257,10 @@ namespace driverClasses
                 }
 
                 if (trySerialPort(port) == 1)
-                    break;
+                    return connectioStatus.connected;
 
             }
+            return connectioStatus.disconnected;
         }
         internal static int trySerialPort(string port)
         {
@@ -289,13 +301,13 @@ namespace driverClasses
             if (currentLayer > 3)
                 currentLayer = 0;
         }
-        internal static Thread runWindow(List<List<Button>> buttonList, resetKeylayout rk, saveKeylayout sk, changeLayerDel cl)
+        internal static Thread runWindow(List<List<Button>> buttonList, connectioStatus c, resetKeylayout rk, saveKeylayout sk, changeLayerDel cl, reconnect r)
         {
             Thread newWindowThread = new Thread(new ThreadStart(() =>
             {
                 // create and show the window
-                MainWindow obj = new MainWindow(buttonList, rk, sk, cl);
-                obj.Show();
+                mainWindow = new MainWindow(buttonList, c, rk, sk, cl, r);
+                mainWindow.Show();
 
                 // start the Dispatcher processing  
                 System.Windows.Threading.Dispatcher.Run();

@@ -1,0 +1,83 @@
+﻿<Window x:Class="keyboardWindow.reconnetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="reconnetWindow" Height="200" Width="300"
+        WindowStyle="None" ResizeMode="NoResize"
+        Background="#1b1b1b">
+    <Canvas Height="200" Width="300">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Canvas.Left="118" Canvas.Top="50">
+            <StackPanel.Resources>
+                <sys:Double x:Key="sizeSq">15</sys:Double>
+            </StackPanel.Resources>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border Width="{StaticResource sizeSq}" Height="{StaticResource sizeSq}" CornerRadius="5" Background="White" Grid.Row="0" Grid.Column="0" Margin="2.5"/>
+                <Border Width="{StaticResource sizeSq}" Height="{StaticResource sizeSq}" CornerRadius="5" Background="White" Grid.Row="0" Grid.Column="1" Margin="2.5"/>
+                <Border Width="{StaticResource sizeSq}" Height="{StaticResource sizeSq}" CornerRadius="5" Background="White" Grid.Row="0" Grid.Column="2" Margin="2.5"/>
+                <Border Width="{StaticResource sizeSq}" Height="{StaticResource sizeSq}" CornerRadius="5" Background="White" Grid.Row="1" Grid.Column="0" Margin="2.5"/>
+                <Border Width="{StaticResource sizeSq}" Height="{StaticResource sizeSq}" CornerRadius="5" Background="White" Grid.Row="1" Grid.Column="1" Margin="2.5"/>
+                <Border Width="{StaticResource sizeSq}" Height="{StaticResource sizeSq}" CornerRadius="5" Background="White" Grid.Row="1" Grid.Column="2" Margin="2.5"/>
+                <Border Width="{StaticResource sizeSq}" Height="{StaticResource sizeSq}" CornerRadius="5" Background="White" Grid.Row="2" Grid.Column="0" Margin="2.5"/>
+                <Border Width="{StaticResource sizeSq}" Height="{StaticResource sizeSq}" CornerRadius="5" Background="White" Grid.Row="2" Grid.Column="1" Margin="2.5"/>
+                <Border Width="{StaticResource sizeSq}" Height="{StaticResource sizeSq}" CornerRadius="5" Background="White" Grid.Row="2" Grid.Column="2" Margin="2.5"/>
+            </Grid>
+            <Label Content="connectiong..." Foreground="LightGray"/>
+            <Image  Source="assets/refrashIcon.png" Width="40" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <RotateTransform Angle="0"/>
+                </Image.RenderTransform>
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="Image.MouseEnter">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(RotateTransform.Angle)"
+                                                             From="0" To="360" Duration="0:0:0.5" AccelerationRatio="0.5">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <BounceEase Bounces="2" EasingMode="EaseOut" 
+                                                                Bounciness="7" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Image.MouseLeave">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(Image.RenderTransform).(RotateTransform.Angle)"
+                                                             From="360" To="0" Duration="0:0:0.5" AccelerationRatio="0.5">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <BounceEase Bounces="2" EasingMode="EaseOut" 
+                                                                Bounciness="7"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </StackPanel>
+        <Image Source="assets/closeIcon.png" Width="20" Canvas.Top="10" Canvas.Right="10"/>
+    </Canvas>
+</Window>

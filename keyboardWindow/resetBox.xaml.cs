@@ -28,9 +28,11 @@ namespace keyboardWindow
             message = _message;
             label.Content = message;
         }
-        public static bool show(string message)
+        public static bool show(string message, double xPos = 0, double yPos = 0)
         {
             rBox = new resetBox(message);
+            rBox.Top = yPos;
+            rBox.Left = xPos;
             rBox.ShowDialog();
             return result;
         }

@@ -36,10 +36,11 @@ namespace keyboardWindow
         int curentLayer = 0;
         resetKeylayout resetKeylayoutDel;
         saveKeylayout saveKeylayoutDel;
+        reconnect reconnect;
         public static changeLayerDel changeLayerDel;
         List<List<driverClasses.Button>> buttons;
 
-        public MainWindow(List<List<driverClasses.Button>> buttons, driverClasses.resetKeylayout _resetKeyLayoutDel, driverClasses.saveKeylayout _saveKeylayoutDel, driverClasses.changeLayerDel _changeLayerDel)
+        public MainWindow(List<List<driverClasses.Button>> buttons, connectioStatus conStatus, driverClasses.resetKeylayout _resetKeyLayoutDel, driverClasses.saveKeylayout _saveKeylayoutDel, driverClasses.changeLayerDel _changeLayerDel, driverClasses.reconnect _reconnect)
         {
             InitializeComponent();
 
@@ -47,6 +48,7 @@ namespace keyboardWindow
             keyPadLayers = new List<keyPadLayer>();
             resetKeylayoutDel = _resetKeyLayoutDel;
             saveKeylayoutDel = _saveKeylayoutDel;
+            reconnect = _reconnect;
             changeLayerDel = _changeLayerDel;
             this.buttons = buttons;
 
@@ -56,6 +58,11 @@ namespace keyboardWindow
             notifyIcon.Visible = true;
             notifyIcon.MouseClick += notifyIconClick;
             notifyIcon.Text = "KeyPad";
+
+            if (conStatus == connectioStatus.disconnected)
+            {
+                conPanel.Visibility = Visibility.Visible;
+            }
 
             layerMenuButtons = new List<TextBlock>();
             layerMenuButtons.Add(layerMenuButton1);
@@ -72,6 +79,21 @@ namespace keyboardWindow
             g = getGrids(keyPadLayers);
             rightGrid.Children.Add(g[curentLayer]);
         }
+
+        public void showConnectingWindow()
+        {
+            reconnetWindow rw = new reconnetWindow();
+            rw.Top = this.Top + (this.Height / 2 - rw.Height / 2);
+            rw.Left = this.Left + (this.Width / 2 - rw.Width / 2);
+            blurIn();
+            rw.ShowDialog();
+        }
+
+        private void refrashClick(object sender, RoutedEventArgs e)
+        {
+            reconnect();
+        }
+
         private List<keyPadLayer> createKepadLayers(List<List<driverClasses.Button>> buttons)
         {
             List<keyPadLayer> layers = new List<keyPadLayer>();
@@ -234,7 +256,7 @@ namespace keyboardWindow
         {
             blurIn();
 
-            if (resetBox.show("Do you want to reset current Layout?"))
+            if (resetBox.show("Do you want to reset current Layout?", this.Left + this.Width / 2 - 170, this.Top + this.Height / 2 - 75))
             {
                 if (resetKeylayoutDel != null)
                 {
@@ -254,7 +276,7 @@ namespace keyboardWindow
         {
             blurIn();
 
-            if (resetBox.show("Do you want to save current layout?"))
+            if (resetBox.show("Do you want to save current layout?", this.Left + this.Width / 2 - 170, this.Top + this.Height / 2 - 75))
             {
                 if (saveKeylayoutDel != null)
                 {
@@ -270,5 +292,7 @@ namespace keyboardWindow
         {
 
         }
+
+
     }
 }

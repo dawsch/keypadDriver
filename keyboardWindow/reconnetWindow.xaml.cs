@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuickAndDirtyAttempt
+namespace keyboardWindow
 {
     /// <summary>
-    /// Interaction logic for MyControl.xaml
+    /// Logika interakcji dla klasy reconnetWindow.xaml
     /// </summary>
-    public partial class Decorator : UserControl
+    public partial class reconnetWindow : Window
     {
-        public Decorator()
+        public reconnetWindow()
         {
             InitializeComponent();
         }

@@ -208,6 +208,10 @@
             </StackPanel>
         </ScrollViewer>
         <local:buttonInfo x:Name="buttonInfoPanel" Grid.Column="1" Height="350" VerticalAlignment="Top" Margin="10, 20, 10, 20"/>
+        <StackPanel x:Name="conPanel" Grid.Column="1" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="Hidden">
+            <Label Content="Device not connecred" Foreground="Red"/>
+            <buttons:roundButton Content="Refresh" Background="#303030" cornerRadius="10" Margin="20 2 2 2" Click="refrashClick"/>
+        </StackPanel>
     </Grid>
 
 </Window>
